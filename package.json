@@ -29,10 +29,10 @@
     "slug": "^3.3.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4",
-    "tunnel-agent": ">=0.6.0",
-    "extend": ">=2.0.2",
     "cryptiles": ">=4.1.2",
-    "hoek": ">=4.2.1"
+    "extend": ">=2.0.2",
+    "hoek": ">=4.2.1",
+    "nodemon": "^2.0.4",
+    "tunnel-agent": ">=0.6.0"
   }
 }
