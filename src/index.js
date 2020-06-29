@@ -16,7 +16,18 @@ mongoose.connect(process.env.MONGO_URL,
         useUnifiedTopology: true
     })
 
-app.use(cors())
+const whitelist = [process.env.APP_URL]
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}    
+
+app.use(cors(corsOptions))
 app.use(express.static(path.resolve(__dirname, '..', 'tmp')))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
