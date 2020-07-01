@@ -5,9 +5,12 @@ const saltRounds = 10
 module.exports = {
 
     async list(req, res) {
-        const users = await User.find().populate('disks')
-
-        return res.json(users)
+        try {
+            const users = await User.find().populate('disks')
+            return res.status(200).json(users)
+        } catch(err) {
+            return res.status(500).json(err)
+        }
     },
 
     async store(req, res) {
@@ -29,7 +32,7 @@ module.exports = {
             return res.json(user)
 
         } catch (err) {
-            return res.json({Erro: "Erro ao cadastrar."})
+            return res.status(500).json(err)
         }
     },
 

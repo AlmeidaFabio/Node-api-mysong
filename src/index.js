@@ -9,25 +9,14 @@ const session = require('express-session')
 
 const app = express()
 
-mongoose.connect(process.env.MONGO_URL,
+app.use(cors())
+mongoose.connect(process.env.MONGO_URL_REMOTE,
     {   
         useCreateIndex: true,
         useNewUrlParser: true, 
         useUnifiedTopology: true
     })
 
-const whitelist = [process.env.APP_URL]
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}    
-
-app.use(cors(corsOptions))
 app.use(express.static(path.resolve(__dirname, '..', 'tmp')))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
